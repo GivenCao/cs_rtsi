@@ -1,0 +1,76 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="资源文件">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include=".h">
+      <UniqueIdentifier>{d6ff7847-a46d-4328-96f4-66a70179383e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include=".cpp">
+      <UniqueIdentifier>{369eebb2-98cb-4da6-88ac-22414ecde595}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="dashboard_client.h">
+      <Filter>.h</Filter>
+    </ClInclude>
+    <ClInclude Include="dashboard_enums.h">
+      <Filter>.h</Filter>
+    </ClInclude>
+    <ClInclude Include="robot_state.h">
+      <Filter>.h</Filter>
+    </ClInclude>
+    <ClInclude Include="rtc_utility.h">
+      <Filter>.h</Filter>
+    </ClInclude>
+    <ClInclude Include="rtsi.h">
+      <Filter>.h</Filter>
+    </ClInclude>
+    <ClInclude Include="rtsi_control_interface.h">
+      <Filter>.h</Filter>
+    </ClInclude>
+    <ClInclude Include="rtsi_control_script.h">
+      <Filter>.h</Filter>
+    </ClInclude>
+    <ClInclude Include="rtsi_control_script_test.h">
+      <Filter>.h</Filter>
+    </ClInclude>
+    <ClInclude Include="rtsi_export.h">
+      <Filter>.h</Filter>
+    </ClInclude>
+    <ClInclude Include="rtsi_receive_interface.h">
+      <Filter>.h</Filter>
+    </ClInclude>
+    <ClInclude Include="script_client.h">
+      <Filter>.h</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="dashboard_client.cpp">
+      <Filter>.cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="dashboard_enums.cpp">
+      <Filter>.cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="robot_state.cpp">
+      <Filter>.cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="rtsi.cpp">
+      <Filter>.cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="rtsi_control_interface.cpp">
+      <Filter>.cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="rtsi_receive_interface.cpp">
+      <Filter>.cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="script_client.cpp">
+      <Filter>.cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="test.cpp">
+      <Filter>.cpp</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>
