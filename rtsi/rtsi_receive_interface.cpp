@@ -55,7 +55,7 @@ namespace cs_rtsi
 		// Setup recipes
 		setupRecipes(m_frequency);
 
-		// Start RTDE data synchronization
+		// Start rtsi data synchronization
 		mp_rtsi->sendStart();
 
 		// Start executing receiveCallback
@@ -364,7 +364,7 @@ namespace cs_rtsi
 			// Setup recipes
 			setupRecipes(m_frequency);
 
-			// Start RTDE data synchronization
+			// Start rtsi data synchronization
 			mp_rtsi->sendStart();
 
 			m_stop_thread = false;

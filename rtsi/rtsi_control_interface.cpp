@@ -34,7 +34,7 @@ namespace cs_rtsi
 		m_custom_script_running = false;
 		mp_rtsi = std::make_shared<RTSI>(m_hostname, m_port, m_verbose);
 		mp_rtsi->connect();
-		//std::cout << "enter rtde" << std::endl;
+		//std::cout << "enter rtsi" << std::endl;
 		mp_rtsi->negotiateProtocolVersion();
 		auto controller_version = mp_rtsi->getControllerVersion();
 		uint32_t major_version = std::get<MAJOR_VERSION>(controller_version);
@@ -56,7 +56,7 @@ namespace cs_rtsi
 		mp_script_client->connect();
 
 
-		// If user want to use upper range of RTDE registers, add the register offset in control script
+		// If user want to use upper range of rtsi registers, add the register offset in control script
 		if (m_use_upper_range_registers)
 		{
 			mp_script_client->setScriptInjection("# float register offset\n", "24");
@@ -83,7 +83,7 @@ namespace cs_rtsi
 
 		while (!mp_rtsi->isStarted())
 		{
-			// Wait until RTDE data synchronization has started or timeout
+			// Wait until rtsi data synchronization has started or timeout
 			std::chrono::high_resolution_clock::time_point current_time = std::chrono::high_resolution_clock::now();
 			auto duration = std::chrono::duration_cast<std::chrono::seconds>(current_time - start_time).count();
 			if (duration > RTSI_START_SYNCHRONIZATION_TIMEOUT)
@@ -93,7 +93,7 @@ namespace cs_rtsi
 		}
 
 		if (!mp_rtsi->isStarted())
-			throw std::logic_error("Failed to start RTDE data synchronization, before timeout");
+			throw std::logic_error("Failed to start rtsi data synchronization, before timeout");
 
 		// Start executing receiveCallback
 		mp_th = std::make_shared<boost::thread>(boost::bind(&RTSIControlInterface::receiveCallback, this));
@@ -234,7 +234,7 @@ namespace cs_rtsi
 		// Map the output registers to functions
 		initOutputRegFuncMap();
 
-		// If user want to use upper range of RTDE registers, add the register offset in control script
+		// If user want to use upper range of rtsi registers, add the register offset in control script
 		if (m_use_upper_range_registers)
 		{
 			mp_script_client->setScriptInjection("# float register offset\n", "24");
@@ -251,17 +251,17 @@ namespace cs_rtsi
 		// Setup default recipes
 		setupRecipes(m_frequency);
 
-		// Wait until RTDE data synchronization has started.
+		// Wait until rtsi data synchronization has started.
 		if (m_verbose)
-			std::cout << "Waiting for RTDE data synchronization to start..." << std::endl;
+			std::cout << "Waiting for rtsi data synchronization to start..." << std::endl;
 		std::chrono::high_resolution_clock::time_point start_time = std::chrono::high_resolution_clock::now();
 
-		// Start RTDE data synchronization
+		// Start rtsi data synchronization
 		mp_rtsi->sendStart();
 
 		while (!mp_rtsi->isStarted())
 		{
-			// Wait until RTDE data synchronization has started or timeout
+			// Wait until rtsi data synchronization has started or timeout
 			std::chrono::high_resolution_clock::time_point current_time = std::chrono::high_resolution_clock::now();
 			auto duration = std::chrono::duration_cast<std::chrono::seconds>(current_time - start_time).count();
 			if (duration > RTSI_START_SYNCHRONIZATION_TIMEOUT)
@@ -271,7 +271,7 @@ namespace cs_rtsi
 		}
 
 		if (!mp_rtsi->isStarted())
-			throw std::logic_error("Failed to start RTDE data synchronization, before timeout");
+			throw std::logic_error("Failed to start rtsi data synchronization, before timeout");
 
 		// Start executing receiveCallback
 		m_stop_thread = false;
@@ -315,7 +315,7 @@ namespace cs_rtsi
 
 
 
-		// When the user wants to a custom script / program on the controller interacting with ur_rtde.
+		// When the user wants to a custom script / program on the controller interacting with ur_rtsi.
 		if (!m_upload_script && !m_use_external_control_cs_cap)
 		{
 			if (!m_no_wait)
@@ -339,7 +339,7 @@ namespace cs_rtsi
 					if (!isProgramRunning())
 					{
 						disconnect();
-						throw std::logic_error("RTDE control program is not running on controller, before timeout of " +
+						throw std::logic_error("rtsi control program is not running on controller, before timeout of " +
 							std::to_string(WAIT_FOR_PROGRAM_RUNNING_TIMEOUT) + " seconds");
 					}
 				}
@@ -366,11 +366,11 @@ namespace cs_rtsi
 			std::this_thread::sleep_for(std::chrono::milliseconds(100));
 		}
 
-		// Re-upload RTDE script to the UR Controller
+		// Re-upload rtsi script to the UR Controller
 		if (mp_script_client->sendScript())
 		{
 			if (m_verbose)
-				std::cout << "The RTDE Control script has been re-uploaded." << std::endl;
+				std::cout << "The rtsi Control script has been re-uploaded." << std::endl;
 			return true;
 		}
 		else
@@ -403,7 +403,7 @@ namespace cs_rtsi
 	bool RTSIControlInterface::sendCustomScript(const std::string &script)
 	{
 		m_custom_script_running = true;
-		// First stop the running RTDE control script
+		// First stop the running rtsi control script
 		stopScript();
 
 		auto start_time = std::chrono::high_resolution_clock::now();
@@ -424,7 +424,7 @@ namespace cs_rtsi
 
 		sendClearCommand();
 
-		// Re-upload RTDE script to the UR Controller
+		// Re-upload rtsi script to the UR Controller
 		mp_script_client->sendScript();
 
 		while (!isProgramRunning())
@@ -440,7 +440,7 @@ namespace cs_rtsi
 	bool RTSIControlInterface::sendCustomScriptFile(const std::string &file_path)
 	{
 		m_custom_script_running = true;
-		// First stop the running RTDE control script
+		// First stop the running rtsi control script
 		stopScript();
 
 		auto start_time = std::chrono::high_resolution_clock::now();
@@ -461,7 +461,7 @@ namespace cs_rtsi
 
 		sendClearCommand();
 
-		// Re-upload RTDE script to the UR Controller
+		// Re-upload rtsi script to the UR Controller
 		mp_script_client->sendScript();
 
 		while (!isProgramRunning())
@@ -564,10 +564,11 @@ namespace cs_rtsi
 		mp_rtsi->sendInputSetup(get_actual_joint_positions_history_input);
 
 		// Recipe 10
-		std::vector<std::string> get_inverse_kin_input = { inIntReg(0),     inDoubleReg(0),  inDoubleReg(1), inDoubleReg(2),
-														  inDoubleReg(3),  inDoubleReg(4),  inDoubleReg(5), inDoubleReg(6),
-														  inDoubleReg(7),  inDoubleReg(8),  inDoubleReg(9), inDoubleReg(10),
-														  inDoubleReg(11), inDoubleReg(12), inDoubleReg(13) };
+		int offside = 24;
+		std::vector<std::string> get_inverse_kin_input = { inIntReg(0),     inDoubleReg(0+ offside),  inDoubleReg(1 + offside), inDoubleReg(2 + offside),
+														  inDoubleReg(3 + offside),  inDoubleReg(4 + offside),  inDoubleReg(5 + offside), inDoubleReg(6 + offside),
+														  inDoubleReg(7 + offside),  inDoubleReg(8 + offside),  inDoubleReg(9 + offside), inDoubleReg(10 + offside),
+														  inDoubleReg(11 + offside)};
 		mp_rtsi->sendInputSetup(get_inverse_kin_input);
 
 		// Recipe 11
@@ -911,7 +912,7 @@ namespace cs_rtsi
 		}
 		catch (std::exception &e)
 		{
-		  std::cerr << "RTDEControlInterface: Could not receive data from robot..." << std::endl;
+		  std::cerr << "rtsiControlInterface: Could not receive data from robot..." << std::endl;
 		  std::cerr << e.what() << std::endl;
 		  if (mp_rtsi != nullptr)
 		  {
@@ -920,12 +921,12 @@ namespace cs_rtsi
 
 			if (!mp_rtsi->isConnected())
 			{
-			  std::cerr << "RTDEControlInterface: Robot is disconnected, reconnecting..." << std::endl;
+			  std::cerr << "rtsiControlInterface: Robot is disconnected, reconnecting..." << std::endl;
 			  reconnect();
 			}
 
 			if (mp_rtsi->isConnected())
-			  std::cout << "RTDEControlInterface: Successfully reconnected!" << std::endl;
+			  std::cout << "rtsiControlInterface: Successfully reconnected!" << std::endl;
 			else
 			  throw std::runtime_error("Could not recover from losing connection to robot!");
 		  }
@@ -1003,7 +1004,7 @@ namespace cs_rtsi
 							// signal
 							if (!isProgramRunning())
 							{
-								std::cerr << "RTDEControlInterface: RTDE control script is not running!" << std::endl;
+								std::cerr << "rtsiControlInterface: rtsi control script is not running!" << std::endl;
 								sendClearCommand();
 								return false;
 							}
@@ -1068,7 +1069,7 @@ namespace cs_rtsi
 			}
 			else
 			{
-				std::cerr << "RTDEControlInterface: RTDE control script is not running!" << std::endl;
+				std::cerr << "rtsiControlInterface: rtsi control script is not running!" << std::endl;
 				sendClearCommand();
 				return false;
 			}
@@ -1078,7 +1079,7 @@ namespace cs_rtsi
 		}
 		catch (const std::exception& e)
 		{
-			std::cerr << "RTDEControlInterface: Lost connection to robot..." << std::endl;
+			std::cerr << "rtsiControlInterface: Lost connection to robot..." << std::endl;
 			std::cerr << e.what() << std::endl;
 			if (mp_rtsi != nullptr)
 			{
@@ -1089,7 +1090,7 @@ namespace cs_rtsi
 
 		if (!mp_rtsi->isConnected())
 		{
-			std::cerr << "RTDEControlInterface: Robot is disconnected, reconnecting..." << std::endl;
+			std::cerr << "rtsiControlInterface: Robot is disconnected, reconnecting..." << std::endl;
 			reconnect();
 			return sendCommand(cmd);
 		}
@@ -1116,12 +1117,12 @@ namespace cs_rtsi
 			{
 				ms_retry_count = 0;
 				if (m_verbose)
-					std::cout << "ur_rtde: Program not running - resending script" << std::endl;
+					std::cout << "ur_rtsi: Program not running - resending script" << std::endl;
 				mp_script_client->sendScript();
 			}
 			if (ms_count > 5000)
 			{
-				throw std::logic_error("ur_rtde: Failed to start control script, before timeout");
+				throw std::logic_error("ur_rtsi: Failed to start control script, before timeout");
 			}
 		}
 
@@ -1417,8 +1418,8 @@ namespace cs_rtsi
 			robot_cmd.m_recipe_id = RTSI::RobotCommand::Recipe::RECIPE_10;
 			robot_cmd.m_val = x;
 			robot_cmd.m_val.insert(robot_cmd.m_val.end(), qnear.begin(), qnear.end());
-			robot_cmd.m_val.push_back(max_position_error);
-			robot_cmd.m_val.push_back(max_orientation_error);
+			//robot_cmd.m_val.push_back(max_position_error);
+			//robot_cmd.m_val.push_back(max_orientation_error);
 		}
 		else
 		{

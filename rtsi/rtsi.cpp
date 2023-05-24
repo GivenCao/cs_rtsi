@@ -164,7 +164,7 @@ namespace cs_rtsi
 	bool RTSI::negotiateProtocolVersion()
 	{
 		std::uint8_t cmd = RTSI_REQUEST_PROTOCOL_VERSION;
-		// Pack RTDE_PROTOCOL_VERSION into payload
+		// Pack rtsi_PROTOCOL_VERSION into payload
 		uint8_t null_byte = 0;
 		uint8_t version = RTSI_PROTOCOL_VERSION;
 		std::vector<char>buffer;
@@ -426,7 +426,7 @@ namespace cs_rtsi
 		case cs_rtsi::RTSI::RTSI_REQUEST_PROTOCOL_VERSION:
 		{
 			uint8_t negotiate_result = data.at(0);
-			std::cout << "Protocol negotiate result : " << unsigned(negotiate_result) << "\n";
+			//std::cout << "Protocol negotiate result : " << unsigned(negotiate_result) << "\n";
 			break;
 
 		}
@@ -459,7 +459,7 @@ namespace cs_rtsi
 		case cs_rtsi::RTSI::RTSI_CONTROL_PACKAGE_SETUP_OUTPUTS:
 		{
 			uint8_t subscription_id = data.at(0);
-			std::cout << "Subscription id : " << unsigned(subscription_id) << "\n";
+			//std::cout << "Subscription id : " << unsigned(subscription_id) << "\n";
 			std::string datatypes(std::begin(data) + 1, std::end(data));
 			DEBUG("Datatype:" << datatypes);
 			m_output_types = RTCUtility::split(datatypes, ',');
@@ -493,8 +493,8 @@ namespace cs_rtsi
 		{
 			char success = data.at(0);
 			DEBUG("success: " << static_cast<bool>(success));
-			auto rtde_success = static_cast<bool>(success);
-			if (rtde_success)
+			auto rtsi_success = static_cast<bool>(success);
+			if (rtsi_success)
 			{
 				m_conn_state = ConnectionState::STARTED;
 				setConState();
@@ -661,7 +661,7 @@ namespace cs_rtsi
 				const std::vector<char> &data,
 				uint32_t &msg_offset) 
 			{
-				// calls robot_state->setVarFun(RTDEUtility::parseVarFun(data,offset))
+				// calls robot_state->setVarFun(rtsiUtility::parseVarFun(data,offset))
 				(*state_ptr.*fun)((*parse_fun)(data, msg_offset));
 			}
 			);

@@ -69,7 +69,7 @@ namespace cs_rtsi
 		void setScriptInjection(const std::string& search_string, const std::string& inject_string);
 
 		/***************************
-		@brief      : Get the corrected rtde_control script as a std::string
+		@brief      : Get the corrected rtsi_control script as a std::string
 		@time       : 2023/04/11
 		****************************/
 		std::string getScript();

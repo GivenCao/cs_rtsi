@@ -64,7 +64,7 @@ namespace cs_rtsi
 
 
 
-	//这个类提供了控制机器人和执行机器人的接口运动。注意目前RTDEControlInterface，不应该被认为是线程
+	//这个类提供了控制机器人和执行机器人的接口运动。注意目前RTSIControlInterface，不应该被认为是线程
     //安全，因为没有采取任何措施(互斥)来确保函数是安全的，在执行另一个之前。这取决于调用者是否使用互斥锁提供保护。
 	class RTSIControlInterface
 	{
@@ -137,7 +137,7 @@ namespace cs_rtsi
 		RTSI_EXPORT bool isConnected();
 
 		/**
-		 * @brief In the event of an error, this function can be used to resume operation by reuploading the RTDE control
+		 * @brief In the event of an error, this function can be used to resume operation by reuploading the RTSI control
 		 * script. This will only happen if a script is not already running on the controller.
 		 */
 		RTSI_EXPORT bool reuploadScript();
@@ -170,7 +170,7 @@ namespace cs_rtsi
 							   "\twrite_output_integer_register(0, 2)\n"
 					   "end\n"
 					   "run program\n";
-				 bool result = rtde_c.sendCustomScript(inline_script);
+				 bool result = rtsi_c.sendCustomScript(inline_script);
 		  * \endcode
 		  * @return Returns true if the script has been executed successfully and false
 		  * on timeout
@@ -490,7 +490,7 @@ namespace cs_rtsi
 		* expected to arrive. The watchdog is useful for safety critical realtime applications eg. servoing. The default
 		* action taken is to shutdown the control, if the watchdog is not kicked with the minimum frequency.
 		*
-		* Preferably you would call this function right after the RTDEControlInterface has been constructed.
+		* Preferably you would call this function right after the rtsiControlInterface has been constructed.
 		*
 		* @param min_frequency The minimum frequency an input update is expected to arrive defaults to 10Hz.
 		*/

@@ -444,7 +444,7 @@ namespace cs_rtsi
 	    [0-23]整型输出寄存器的较低范围是保留的现场总线/PLC接口使用情况。
 		[24-47]整形寄存器的上范围可用于外部RTSI客户端
 		@param[in]  :  output_id要读取的寄存器的id，目前支持的范围是:[18-22]或[42-46]，
-		这可以可以通过改变RTDEReceiveInterface输出配方
+		这可以可以通过改变rtsiReceiveInterface输出配方
 		和使用use_upper_range_registers来调整构造函数标志在上下限之间切换。
 		@return     : 从指定的输出寄存器返回一个整数
 		@time       : 2023/03/28
@@ -456,7 +456,7 @@ namespace cs_rtsi
 		[0-23]浮点数输出寄存器的较低范围是保留的现场总线/PLC接口使用情况。
 		[24-47]浮点数寄存器的上范围可用于外部RTSI客户端
 		@param[in]  : output_id要读取的寄存器的id，目前支持的范围是:[18-22]或[42-46]，
-		这可以可以通过改变RTDEReceiveInterface输出配方
+		这可以可以通过改变rtsiReceiveInterface输出配方
 		和使用use_upper_range_registers来调整构造函数标志在上下限之间切换。
 		@return     : 从指定的输出寄存器返回一个浮点数
 		@time       : 2023/03/28

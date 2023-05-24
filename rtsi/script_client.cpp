@@ -193,7 +193,7 @@ namespace cs_rtsi
 		}
 
 
-		std::cout << cs_script << std::endl;
+		//std::cout << cs_script << std::endl;
 
 		if (isConnected() && !cs_script.empty())
 		{

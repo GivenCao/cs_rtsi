@@ -330,7 +330,7 @@ std::string CS_SCRIPT = "# HEADER_BEGIN" + NEW_LINE +
 "        write_output_integer_reg(0, 2)" + NEW_LINE +
 "    end" + NEW_LINE +
 "" + NEW_LINE +
-"    def rtde_cmd():" + NEW_LINE +
+"    def rtsi_cmd():" + NEW_LINE +
 "        return read_input_integer_reg(0)" + NEW_LINE +
 "    end" + NEW_LINE +
 "" + NEW_LINE +
@@ -888,7 +888,7 @@ std::string CS_SCRIPT = "# HEADER_BEGIN" + NEW_LINE +
 "    signal_ready()" + NEW_LINE +
 "" + NEW_LINE +
 "    while keep_running:" + NEW_LINE +
-"        cmd = rtde_cmd()" + NEW_LINE +
+"        cmd = rtsi_cmd()" + NEW_LINE +
 "        if cmd == 24 or cmd == 11 or cmd == 9 or cmd == 10 or cmd == 6 or cmd == 25 or cmd == 26 or cmd == 27 or cmd == 38:" + NEW_LINE +
 "            # for realtime commands simply process and signal ready." + NEW_LINE +
 "            keep_running = process_cmd()" + NEW_LINE +

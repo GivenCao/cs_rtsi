@@ -854,10 +854,10 @@ std::string CS_SCRIPT = "# HEADER_BEGIN" + NEW_LINE +
 "            end" + NEW_LINE +
 "        elif cmd == 46:" + NEW_LINE +
 "            #textmsg(" + QUOTATION + "get_inverse_kin_default" + QUOTATION + ")" + NEW_LINE +
-"            x = pose_from_input_float_registers(0)" + NEW_LINE +
+"            x = pose_from_input_float_registers(24)" + NEW_LINE +
 "            #textmsg(" + QUOTATION + "target pose:" + QUOTATION + ",x)" + NEW_LINE +
 "            q = get_inverse_kin(x)" + NEW_LINE +
-"            q_to_output_float_registers(0, q)" + NEW_LINE +
+"            q_to_output_float_registers(24, q)" + NEW_LINE +
 "            #textmsg(" + QUOTATION + "inverse q:" + QUOTATION + ",q)" + NEW_LINE +
 "            #textmsg(" + QUOTATION + "get_inverse_kin_default done" + QUOTATION + ")" + NEW_LINE +
 "        elif cmd == 60:" + NEW_LINE +

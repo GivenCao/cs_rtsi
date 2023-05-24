@@ -58,16 +58,16 @@ int main()
 	{
 
 
-		//rtde_control.setTcp({ -0.06932, 0.0000, 0.1485, 0, 0, 0 });
+		//rtsi_control.setTcp({ -0.06932, 0.0000, 0.1485, 0, 0, 0 });
 		std::vector<double> direction = { 1,0.0,0.0,0.0,0.0,0.0 };
-		// std::vector<double> direction = rtdeStade.getActualTCPSpeed();
+		// std::vector<double> direction = rtsiStade.getActualTCPSpeed();
 		// std::cout << direction[0] << " " << direction[1] << " " << direction[2] << " " << direction[3] << " "
 		// << direction[4] << " " << direction[5] << std::endl;
-		//rtde_control.moveUntilContact(speed, direction);
+		//rtsi_control.moveUntilContact(speed, direction);
 		//double speed_magnitude = 0.15;
 
 		control.jogStart(speed, cs_rtsi::RTSIControlInterface::FEATURE_TOOL);
-		//rtde_control.jogStart(speed, RTDEControlInterface::FEATURE_TOOL);
+		//rtsi_control.jogStart(speed, rtsiControlInterface::FEATURE_TOOL);
 		//
 		//std::this_thread::sleep_for(std::chrono::milliseconds(2));
 		count++;
