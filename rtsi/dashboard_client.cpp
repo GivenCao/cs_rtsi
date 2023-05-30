@@ -69,7 +69,7 @@ namespace cs_rtsi
 
 		if (m_verbose)
 		{
-			std::cout << "Connecting to UR dashboard server ....." << std::endl;
+			std::cout << "Connecting to CS dashboard server ....." << std::endl;
 		}
 
 		m_deadline.expires_from_now(boost::posix_time::milliseconds(timeout_ms));
@@ -84,7 +84,7 @@ namespace cs_rtsi
 		if (ec || !mp_socket->is_open())
 		{
 			return false;
-			//throw std::runtime_error("Timeout connecting to UR dashboard server.");
+			//throw std::runtime_error("Timeout connecting to CS dashboard server.");
 		}
 		else
 		{
@@ -94,7 +94,7 @@ namespace cs_rtsi
 		}
 
 		if (m_verbose)
-			std::cout << "Connected successfully to UR dashboard server: " 
+			std::cout << "Connected successfully to CS dashboard server: " 
 			<< m_hostname << " at " << m_port << std::endl;
 		return true;
 	}

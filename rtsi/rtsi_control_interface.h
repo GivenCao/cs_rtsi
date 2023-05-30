@@ -154,7 +154,7 @@ namespace cs_rtsi
 
 
 		/**
-		  * Send a custom ur script to the controller
+		  * Send a custom cs script to the controller
 		  * The function enables sending of short scripts which was defined inline
 		  * within source code. So you can write code like this:
 		  * \code
@@ -178,8 +178,8 @@ namespace cs_rtsi
 		RTSI_EXPORT bool sendCustomScript(const std::string &script);
 
 		/**
-		 * @brief Send a custom ur script file to the controller
-		 * @param file_path the file path to the custom ur script file
+		 * @brief Send a custom cs script file to the controller
+		 * @param file_path the file path to the custom cs script file
 		 */
 		RTSI_EXPORT bool sendCustomScriptFile(const std::string &file_path);
 

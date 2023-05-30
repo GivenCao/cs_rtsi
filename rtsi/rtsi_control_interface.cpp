@@ -108,7 +108,7 @@ namespace cs_rtsi
 		{
 			if (!isProgramRunning())
 			{
-				// Send script to the UR Controller
+				// Send script to the CS Controller
 				mp_script_client->sendScript();
 				waitForProgramRunning();
 			}
@@ -123,7 +123,7 @@ namespace cs_rtsi
 				// Wait until terminated
 				std::this_thread::sleep_for(std::chrono::milliseconds(100));
 
-				// Send script to the UR Controller
+				// Send script to the CS Controller
 				mp_script_client->sendScript();
 
 				while (!isProgramRunning())
@@ -220,7 +220,7 @@ namespace cs_rtsi
 		auto controller_version = mp_rtsi->getControllerVersion();
 		uint32_t major_version = std::get<MAJOR_VERSION>(controller_version);
 
-		m_frequency = 125;
+		m_frequency = 250;
 		// If e-Series Robot set frequency to 500Hz
 		//if (major_version > CB3_MAJOR_VERSION)
 		//	frequency_ = 500;
@@ -287,7 +287,7 @@ namespace cs_rtsi
 		{
 			if (!isProgramRunning())
 			{
-				// Send script to the UR Controller
+				// Send script to the CS Controller
 				mp_script_client->sendScript();
 				waitForProgramRunning();
 			}
@@ -302,7 +302,7 @@ namespace cs_rtsi
 				// Wait until terminated
 				std::this_thread::sleep_for(std::chrono::milliseconds(100));
 
-				// Send script to the UR Controller
+				// Send script to the CS Controller
 				mp_script_client->sendScript();
 
 				while (!isProgramRunning())
@@ -315,7 +315,7 @@ namespace cs_rtsi
 
 
 
-		// When the user wants to a custom script / program on the controller interacting with ur_rtsi.
+		// When the user wants to a custom script / program on the controller interacting with cs_rtsi.
 		if (!m_upload_script && !m_use_external_control_cs_cap)
 		{
 			if (!m_no_wait)
@@ -366,7 +366,7 @@ namespace cs_rtsi
 			std::this_thread::sleep_for(std::chrono::milliseconds(100));
 		}
 
-		// Re-upload rtsi script to the UR Controller
+		// Re-upload rtsi script to the CS Controller
 		if (mp_script_client->sendScript())
 		{
 			if (m_verbose)
@@ -424,7 +424,7 @@ namespace cs_rtsi
 
 		sendClearCommand();
 
-		// Re-upload rtsi script to the UR Controller
+		// Re-upload rtsi script to the CS Controller
 		mp_script_client->sendScript();
 
 		while (!isProgramRunning())
@@ -461,7 +461,7 @@ namespace cs_rtsi
 
 		sendClearCommand();
 
-		// Re-upload rtsi script to the UR Controller
+		// Re-upload rtsi script to the CS Controller
 		mp_script_client->sendScript();
 
 		while (!isProgramRunning())
@@ -1000,7 +1000,7 @@ namespace cs_rtsi
 						{
 							// if the script causes an error, for example because of inverse
 							// kinematics calculation failed, then it may be that the script no
-							// longer runs an we will never receive the UR_CONTROLLER_DONE_WITH_CMD
+							// longer runs an we will never receive the CS_CONTROLLER_DONE_WITH_CMD
 							// signal
 							if (!isProgramRunning())
 							{
@@ -1031,7 +1031,7 @@ namespace cs_rtsi
 					{
 						if (m_use_external_control_cs_cap)
 						{
-							// Program is allowed to still be running when using the ExternalControl UR Cap.
+							// Program is allowed to still be running when using the ExternalControl CS elico.
 							// So we simply wait a bit for the stop script command to go through and clear the cmd register and return.
 							std::this_thread::sleep_for(std::chrono::milliseconds(2));
 							sendClearCommand();
@@ -1117,12 +1117,12 @@ namespace cs_rtsi
 			{
 				ms_retry_count = 0;
 				if (m_verbose)
-					std::cout << "ur_rtsi: Program not running - resending script" << std::endl;
+					std::cout << "cs_rtsi: Program not running - resending script" << std::endl;
 				mp_script_client->sendScript();
 			}
 			if (ms_count > 5000)
 			{
-				throw std::logic_error("ur_rtsi: Failed to start control script, before timeout");
+				throw std::logic_error("cs_rtsi: Failed to start control script, before timeout");
 			}
 		}
 

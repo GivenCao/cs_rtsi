@@ -92,7 +92,7 @@ namespace cs_rtsi
 	//内部私有助手函数，用于加载脚本以避免重复代码
 	static bool loadScript(const std::string& file_name, std::string& str)
 	{
-		// Read in the UR script file
+		// Read in the CS script file
 		// Notice! We use this method as it allocates the memory up front, strictly for performance.
 		std::ifstream file(file_name.c_str());
 		if (file)
