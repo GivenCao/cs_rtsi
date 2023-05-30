@@ -514,19 +514,19 @@ namespace cs_rtsi
 		mp_rtsi->sendOutputSetup(state_names, frequency);
 
 		// Setup input recipes
-        // Recipe 1   £¨9_input£©
+        // RECIPE_1   £¨9_input£©
 		std::vector<std::string> async_setp_input = { inIntReg(0),    inDoubleReg(0), inDoubleReg(1), inDoubleReg(2),
 											 inDoubleReg(3), inDoubleReg(4), inDoubleReg(5), inDoubleReg(6),
 											 inDoubleReg(7), inIntReg(1) };
 		mp_rtsi->sendInputSetup(async_setp_input);
 
-		// Recipe 2¡¡£¨11_input£©
+		// RECIPE_2¡¡£¨11_input£©
 		std::vector<std::string> servoj_input = { inIntReg(0),    inDoubleReg(0), inDoubleReg(1), inDoubleReg(2),
 												 inDoubleReg(3), inDoubleReg(4), inDoubleReg(5), inDoubleReg(6),
 												 inDoubleReg(7), inDoubleReg(8), inDoubleReg(9), inDoubleReg(10) };
 		mp_rtsi->sendInputSetup(servoj_input);
 
-		// Recipe 3
+		// RECIPE_3
 		std::vector<std::string> force_mode_input = {
 			inIntReg(0),     inIntReg(1),     inIntReg(2),     inIntReg(3),     inIntReg(4),     inIntReg(5),
 			inIntReg(6),     inIntReg(7),     inDoubleReg(0),  inDoubleReg(1),  inDoubleReg(2),  inDoubleReg(3),
@@ -535,35 +535,35 @@ namespace cs_rtsi
 			inDoubleReg(16), inDoubleReg(17) };
 		mp_rtsi->sendInputSetup(force_mode_input);
 
-		// Recipe 4 (0_input)
+		// RECIPE_4 (0_input)
 		std::vector<std::string> no_cmd_input = { inIntReg(0) };
 		mp_rtsi->sendInputSetup(no_cmd_input);
 
-		// Recipe 5
+		// RECIPE_5
 		std::vector<std::string> servoc_input = { inIntReg(0),    inDoubleReg(0), inDoubleReg(1), inDoubleReg(2),
 												 inDoubleReg(3), inDoubleReg(4), inDoubleReg(5), inDoubleReg(6),
 												 inDoubleReg(7), inDoubleReg(8) };
 		mp_rtsi->sendInputSetup(servoc_input);
 
-		// Recipe 6
+		// RECIPE_6
 		std::vector<std::string> wrench_input = { inIntReg(0),    inDoubleReg(0), inDoubleReg(1), inDoubleReg(2),
 												 inDoubleReg(3), inDoubleReg(4), inDoubleReg(5) };
 		mp_rtsi->sendInputSetup(wrench_input);
 
-		// Recipe 7
+		// RECIPE_7
 		std::vector<std::string> set_payload_input = { inIntReg(0), inDoubleReg(0), inDoubleReg(1), inDoubleReg(2),
 													  inDoubleReg(3) };
 		mp_rtsi->sendInputSetup(set_payload_input);
 
-		// Recipe 8
+		// RECIPE_8
 		std::vector<std::string> force_mode_parameters_input = { inIntReg(0), inDoubleReg(0) };
 		mp_rtsi->sendInputSetup(force_mode_parameters_input);
 
-		// Recipe 9
+		// RECIPE_9
 		std::vector<std::string> get_actual_joint_positions_history_input = { inIntReg(0), inIntReg(1) };
 		mp_rtsi->sendInputSetup(get_actual_joint_positions_history_input);
 
-		// Recipe 10
+		// RECIPE_10
 		int offside = 24;
 		std::vector<std::string> get_inverse_kin_input = { inIntReg(0),     inDoubleReg(0+ offside),  inDoubleReg(1 + offside), inDoubleReg(2 + offside),
 														  inDoubleReg(3 + offside),  inDoubleReg(4 + offside),  inDoubleReg(5 + offside), inDoubleReg(6 + offside),
@@ -571,27 +571,27 @@ namespace cs_rtsi
 														  inDoubleReg(11 + offside)};
 		mp_rtsi->sendInputSetup(get_inverse_kin_input);
 
-		// Recipe 11
+		// RECIPE_11
 		std::vector<std::string> watchdog_input = { inIntReg(0) };
 		mp_rtsi->sendInputSetup(watchdog_input);
 
-		// Recipe 12
+		// RECIPE_12
 		std::vector<std::string> pose_trans_input = {
 			inIntReg(0),    inDoubleReg(0), inDoubleReg(1), inDoubleReg(2), inDoubleReg(3),  inDoubleReg(4), inDoubleReg(5),
 			inDoubleReg(6), inDoubleReg(7), inDoubleReg(8), inDoubleReg(9), inDoubleReg(10), inDoubleReg(11) };
 		mp_rtsi->sendInputSetup(pose_trans_input);
 
-		// Recipe 13
+		// RECIPE_13
 		std::vector<std::string> setp_input = { inIntReg(0),    inDoubleReg(0), inDoubleReg(1), inDoubleReg(2), inDoubleReg(3),
 											   inDoubleReg(4), inDoubleReg(5), inDoubleReg(6), inDoubleReg(7) };
 		mp_rtsi->sendInputSetup(setp_input);
 
-		// Recipe 14
+		// RECIPE_14
 		std::vector<std::string> jog_input = { inIntReg(0),    inDoubleReg(0), inDoubleReg(1), inDoubleReg(2),
 											  inDoubleReg(3), inDoubleReg(4), inDoubleReg(5), inDoubleReg(6) };
 		mp_rtsi->sendInputSetup(jog_input);
 
-		// Recipe 15
+		// RECIPE_15
 		std::vector<std::string> async_path_input = { inIntReg(0), inIntReg(1) };
 		mp_rtsi->sendInputSetup(async_path_input);
 
@@ -1224,6 +1224,26 @@ namespace cs_rtsi
 		robot_cmd.m_type = RTSI::RobotCommand::Type::SERVOJ;
 		robot_cmd.m_recipe_id = RTSI::RobotCommand::Recipe::RECIPE_2;
 		robot_cmd.m_val = q;
+		robot_cmd.m_val.push_back(speed);
+		robot_cmd.m_val.push_back(acceleration);
+		robot_cmd.m_val.push_back(time);
+		robot_cmd.m_val.push_back(lookahead_time);
+		robot_cmd.m_val.push_back(gain);
+		return sendCommand(robot_cmd);
+	}
+
+	bool RTSIControlInterface::servoL(const std::vector<double>& pose, double speed, double acceleration, double time,
+		double lookahead_time, double gain)
+	{
+		verifyValueIsWithin(speed, CS_JOINT_VELOCITY_MIN, CS_JOINT_VELOCITY_MAX);
+		verifyValueIsWithin(acceleration, CS_JOINT_ACCELERATION_MIN, CS_JOINT_ACCELERATION_MAX);
+		verifyValueIsWithin(lookahead_time, CS_SERVO_LOOKAHEAD_TIME_MIN, CS_SERVO_LOOKAHEAD_TIME_MAX);
+		verifyValueIsWithin(gain, CS_SERVO_GAIN_MIN, CS_SERVO_GAIN_MAX);
+
+		RTSI::RobotCommand robot_cmd;
+		robot_cmd.m_type = RTSI::RobotCommand::Type::SERVOL;
+		robot_cmd.m_recipe_id = RTSI::RobotCommand::Recipe::RECIPE_2;
+		robot_cmd.m_val = pose;
 		robot_cmd.m_val.push_back(speed);
 		robot_cmd.m_val.push_back(acceleration);
 		robot_cmd.m_val.push_back(time);

@@ -290,7 +290,7 @@ namespace cs_rtsi
 		* @param lookahead_time time [S], range [0.03,0.2] smoothens the trajectory with this lookahead time
 		* @param gain proportional gain for following target position, range [100,2000]
 		*/
-		bool servoL(const std::vector<double> &pose, double speed, double acceleration, double time,
+		RTSI_EXPORT bool servoL(const std::vector<double> &pose, double speed, double acceleration, double time,
 			double lookahead_time, double gain);
 
 
