@@ -7,6 +7,7 @@ std::string CS_SCRIPT = "# HEADER_BEGIN" + NEW_LINE +
 "    import threading" + NEW_LINE +
 "    import time" + NEW_LINE +
 "    global lock" + NEW_LINE +
+"    global last_cmd" + NEW_LINE +
 "    lock = threading.Lock()" + NEW_LINE +
 "    global reg_offset_float" + NEW_LINE +
 "    global reg_offset_int" + NEW_LINE +
@@ -20,6 +21,7 @@ std::string CS_SCRIPT = "# HEADER_BEGIN" + NEW_LINE +
 "    global is_in_forcemode" + NEW_LINE +
 "" + NEW_LINE +
 "    reg_offset_float = 0" + NEW_LINE +
+"    last_cmd = 0" + NEW_LINE +
 "    reg_offset_int = 0" + NEW_LINE +
 "    force_mode_type = 2" + NEW_LINE +
 "    selection_vector = [0, 0, 0, 0, 0, 0]" + NEW_LINE +
@@ -363,7 +365,13 @@ std::string CS_SCRIPT = "# HEADER_BEGIN" + NEW_LINE +
 "    end" + NEW_LINE +
 "" + NEW_LINE +
 "    def rtsi_cmd():" + NEW_LINE +
-"        return read_input_integer_reg(0)" + NEW_LINE +
+"        global last_cmd" + NEW_LINE +
+"        current_cmd = read_input_integer_reg(0)" + NEW_LINE +
+"        if current_cmd != last_cmd:" + NEW_LINE +
+"            textmsg(" + QUOTATION + "current_cmd=" + QUOTATION + ", current_cmd)" + NEW_LINE +
+"        end" + NEW_LINE +
+"        last_cmd = current_cmd" + NEW_LINE +
+"        return current_cmd" + NEW_LINE +
 "    end" + NEW_LINE +
 "" + NEW_LINE +
 "    def process_cmd():" + NEW_LINE +
@@ -853,9 +861,9 @@ std::string CS_SCRIPT = "# HEADER_BEGIN" + NEW_LINE +
 "                textmsg(" + QUOTATION + "move_path done" + QUOTATION + ")" + NEW_LINE +
 "            end" + NEW_LINE +
 "        elif cmd == 46:" + NEW_LINE +
-"            #textmsg(" + QUOTATION + "get_inverse_kin_default" + QUOTATION + ")" + NEW_LINE +
+"            textmsg(" + QUOTATION + "get_inverse_kin_default" + QUOTATION + ")" + NEW_LINE +
 "            x = pose_from_input_float_registers(0)" + NEW_LINE +
-"            #textmsg(" + QUOTATION + "target pose:" + QUOTATION + ",x)" + NEW_LINE +
+"            textmsg(" + QUOTATION + "target pose:" + QUOTATION + ",x)" + NEW_LINE +
 "            q = get_inverse_kin(x)" + NEW_LINE +
 "            q_to_output_float_registers(0, q)" + NEW_LINE +
 "            #textmsg(" + QUOTATION + "inverse q:" + QUOTATION + ",q)" + NEW_LINE +
