@@ -229,8 +229,9 @@ std::string CS_SCRIPT = "# HEADER_BEGIN" + NEW_LINE +
 "            g = servo_gain" + NEW_LINE +
 "            lock.release()" + NEW_LINE +
 "            servoj(q, t=dt, lookahead_time=lh_time, gain=g)" + NEW_LINE +
+"            textmsg(" + QUOTATION + "servoj_q:" + QUOTATION + ",q)" + NEW_LINE +
 "            #textmsg(" + QUOTATION + "time duration:" + QUOTATION + ",time.time()-last_time)" + NEW_LINE +
-"            last_time=time.time()" + NEW_LINE +
+"            #last_time=time.time()" + NEW_LINE +
 "        end" + NEW_LINE +
 "    end" + NEW_LINE +
 "" + NEW_LINE +
@@ -679,9 +680,11 @@ std::string CS_SCRIPT = "# HEADER_BEGIN" + NEW_LINE +
 //"            textmsg(" + QUOTATION + "force_mode_set_gain_scaling done" + QUOTATION + ")" + NEW_LINE +
 "        elif cmd == 24:" + NEW_LINE +
 "            pose = pose_from_input_float_registers(0)" + NEW_LINE +
+"            textmsg(" + QUOTATION + "pose:" + QUOTATION + ",pose)" + NEW_LINE +
 "            velocity = read_input_float_reg(6)" + NEW_LINE +
 "            acceleration = read_input_float_reg(7)" + NEW_LINE +
 "            q = get_inverse_kin(pose)" + NEW_LINE +
+"            textmsg(" + QUOTATION + "q:" + QUOTATION + ",q)" + NEW_LINE +
 "" + NEW_LINE +
 "            lock.acquire()" + NEW_LINE +
 "            servo_target = copy.deepcopy(q)" + NEW_LINE +
