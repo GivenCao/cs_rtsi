@@ -38,7 +38,7 @@ std::string CS_SCRIPT = "# HEADER_BEGIN" + NEW_LINE +
 "    global servo_gain" + NEW_LINE +
 "" + NEW_LINE +
 "    servo_target = [0, 0, 0, 0, 0, 0]" + NEW_LINE +
-"    servo_time = 0.008" + NEW_LINE +
+"    servo_time = 0.004" + NEW_LINE +
 "    servo_lookahead_time = 0.1" + NEW_LINE +
 "    servo_gain = 300" + NEW_LINE +
 "" + NEW_LINE +
@@ -231,7 +231,7 @@ std::string CS_SCRIPT = "# HEADER_BEGIN" + NEW_LINE +
 "            g = servo_gain" + NEW_LINE +
 "            lock.release()" + NEW_LINE +
 "            servoj(q, t=dt, lookahead_time=lh_time, gain=g)" + NEW_LINE +
-"            textmsg(" + QUOTATION + "servoj_q:" + QUOTATION + ",q)" + NEW_LINE +
+"            #textmsg(" + QUOTATION + "servoj_q:" + QUOTATION + ",q)" + NEW_LINE +
 "            #textmsg(" + QUOTATION + "time duration:" + QUOTATION + ",time.time()-last_time)" + NEW_LINE +
 "            #last_time=time.time()" + NEW_LINE +
 "        end" + NEW_LINE +
@@ -424,13 +424,13 @@ std::string CS_SCRIPT = "# HEADER_BEGIN" + NEW_LINE +
 "        cmd = read_input_integer_reg(0)" + NEW_LINE +
 "" + NEW_LINE +
 "        if cmd == 1:" + NEW_LINE +
-"            #textmsg(" + QUOTATION + "movej" + QUOTATION + ")" + NEW_LINE +
+"            textmsg(" + QUOTATION + "movej" + QUOTATION + ")" + NEW_LINE +
 "            q = q_from_input_float_registers(0)" + NEW_LINE +
 "            velocity = read_input_float_reg(6)" + NEW_LINE +
 "            acceleration = read_input_float_reg(7)" + NEW_LINE +
 "            async = read_input_integer_reg(1)" + NEW_LINE +
-"            #textmsg(" + QUOTATION + "Target q:" + QUOTATION + ")" + NEW_LINE +
-"            #textmsg(q)" + NEW_LINE +
+"            textmsg(" + QUOTATION + "Target q:" + QUOTATION + ")" + NEW_LINE +
+"            textmsg(q)" + NEW_LINE +
 "            stop_async_move()" + NEW_LINE +
 "            if async == 1:" + NEW_LINE +
 "                lock.acquire()" + NEW_LINE +
@@ -445,7 +445,7 @@ std::string CS_SCRIPT = "# HEADER_BEGIN" + NEW_LINE +
 "                textmsg(" + QUOTATION + "movej done" + QUOTATION + ")" + NEW_LINE +
 "            end" + NEW_LINE +
 "        elif cmd == 2:" + NEW_LINE +
-"            #textmsg(" + QUOTATION + "movej_ik" + QUOTATION + ")" + NEW_LINE +
+"            textmsg(" + QUOTATION + "movej_ik" + QUOTATION + ")" + NEW_LINE +
 "            pose = pose_from_input_float_registers(0)" + NEW_LINE +
 "            velocity = read_input_float_reg(6)" + NEW_LINE +
 "            acceleration = read_input_float_reg(7)" + NEW_LINE +
@@ -453,8 +453,8 @@ std::string CS_SCRIPT = "# HEADER_BEGIN" + NEW_LINE +
 "            textmsg(" + QUOTATION + "Target pose:" + QUOTATION + ")" + NEW_LINE +
 "            textmsg(pose)" + NEW_LINE +
 "            q = get_inverse_kin(pose)" + NEW_LINE +
-"            #textmsg(" + QUOTATION + "Target q:" + QUOTATION + ")" + NEW_LINE +
-"            #textmsg(q)" + NEW_LINE +
+"            textmsg(" + QUOTATION + "Target q:" + QUOTATION + ")" + NEW_LINE +
+"            textmsg(q)" + NEW_LINE +
 "            stop_async_move()" + NEW_LINE +
 "            if async == 1:" + NEW_LINE +
 "                lock.acquire()" + NEW_LINE +
@@ -469,13 +469,13 @@ std::string CS_SCRIPT = "# HEADER_BEGIN" + NEW_LINE +
 "                textmsg(" + QUOTATION + "movej_ik done" + QUOTATION + ")" + NEW_LINE +
 "            end" + NEW_LINE +
 "        elif cmd == 3:" + NEW_LINE +
-"            #textmsg(" + QUOTATION + "movel" + QUOTATION + ")" + NEW_LINE +
+"            textmsg(" + QUOTATION + "movel" + QUOTATION + ")" + NEW_LINE +
 "            pose = pose_from_input_float_registers(0)" + NEW_LINE +
 "            velocity = read_input_float_reg(6)" + NEW_LINE +
 "            acceleration = read_input_float_reg(7)" + NEW_LINE +
 "            async = read_input_integer_reg(1)" + NEW_LINE +
-"            #textmsg(" + QUOTATION + "Target pose:" + QUOTATION + ")" + NEW_LINE +
-"            #textmsg(pose)" + NEW_LINE +
+"            textmsg(" + QUOTATION + "Target pose:" + QUOTATION + ")" + NEW_LINE +
+"            textmsg(pose)" + NEW_LINE +
 "            stop_async_move()" + NEW_LINE +
 "            if async == 1:" + NEW_LINE +
 "                lock.acquire()" + NEW_LINE +
@@ -490,7 +490,7 @@ std::string CS_SCRIPT = "# HEADER_BEGIN" + NEW_LINE +
 "                textmsg(" + QUOTATION + "movel done" + QUOTATION + ")" + NEW_LINE +
 "            end" + NEW_LINE +
 "        elif cmd == 4:" + NEW_LINE +
-"            #textmsg(" + QUOTATION + "movel_fk" + QUOTATION + ")" + NEW_LINE +
+"            textmsg(" + QUOTATION + "movel_fk" + QUOTATION + ")" + NEW_LINE +
 "            q = q_from_input_float_registers(0)" + NEW_LINE +
 "            velocity = read_input_float_reg(6)" + NEW_LINE +
 "            acceleration = read_input_float_reg(7)" + NEW_LINE +
@@ -533,7 +533,7 @@ std::string CS_SCRIPT = "# HEADER_BEGIN" + NEW_LINE +
 "                end" + NEW_LINE +
 "            end" + NEW_LINE +
 "        elif cmd == 7:" + NEW_LINE +
-"            #textmsg(" + QUOTATION + "force_mode_stop" + QUOTATION + ")" + NEW_LINE +
+"            textmsg(" + QUOTATION + "force_mode_stop" + QUOTATION + ")" + NEW_LINE +
 "            lock.acquire()" + NEW_LINE +
 "            is_in_forcemode = 0" + NEW_LINE +
 "            stop_thread(force_thrd)" + NEW_LINE +
@@ -543,7 +543,7 @@ std::string CS_SCRIPT = "# HEADER_BEGIN" + NEW_LINE +
 "            lock.release()" + NEW_LINE +
 "            textmsg(" + QUOTATION + "force_mode stopped" + QUOTATION + ")" + NEW_LINE +
 "        elif cmd == 8:" + NEW_LINE +
-"            #textmsg(" + QUOTATION + "zero_ftsensor" + QUOTATION + ")" + NEW_LINE +
+"            textmsg(" + QUOTATION + "zero_ftsensor" + QUOTATION + ")" + NEW_LINE +
 "            zero_ftsensor()" + NEW_LINE +
 "            textmsg(" + QUOTATION + "ftsensor zeroed" + QUOTATION + ")" + NEW_LINE +
 "        elif cmd == 9:" + NEW_LINE +
@@ -627,7 +627,7 @@ std::string CS_SCRIPT = "# HEADER_BEGIN" + NEW_LINE +
 //"            end" + NEW_LINE +
 //"" + NEW_LINE +
 "        elif cmd == 15:" + NEW_LINE +
-"            #textmsg(" + QUOTATION + "speed_stop" + QUOTATION + ")" + NEW_LINE +
+"            textmsg(" + QUOTATION + "speed_stop" + QUOTATION + ")" + NEW_LINE +
 "            deceleration_rate = read_input_float_reg(0)" + NEW_LINE +
 "            lock.acquire()" + NEW_LINE +
 "            is_speeding = 0" + NEW_LINE +
@@ -688,11 +688,11 @@ std::string CS_SCRIPT = "# HEADER_BEGIN" + NEW_LINE +
 //"            textmsg(" + QUOTATION + "force_mode_set_gain_scaling done" + QUOTATION + ")" + NEW_LINE +
 "        elif cmd == 24:" + NEW_LINE +
 "            pose = pose_from_input_float_registers(0)" + NEW_LINE +
-"            textmsg(" + QUOTATION + "pose:" + QUOTATION + ",pose)" + NEW_LINE +
+"            #textmsg(" + QUOTATION + "pose:" + QUOTATION + ",pose)" + NEW_LINE +
 "            velocity = read_input_float_reg(6)" + NEW_LINE +
 "            acceleration = read_input_float_reg(7)" + NEW_LINE +
 "            q = get_inverse_kin(pose)" + NEW_LINE +
-"            textmsg(" + QUOTATION + "q:" + QUOTATION + ",q)" + NEW_LINE +
+"            #textmsg(" + QUOTATION + "q:" + QUOTATION + ",q)" + NEW_LINE +
 "" + NEW_LINE +
 "            lock.acquire()" + NEW_LINE +
 "            servo_target = copy.deepcopy(q)" + NEW_LINE +
@@ -743,7 +743,7 @@ std::string CS_SCRIPT = "# HEADER_BEGIN" + NEW_LINE +
 "            q = get_inverse_kin(x, qnear)" + NEW_LINE +
 "            q_to_output_float_registers(0, q)" + NEW_LINE +
 "            #textmsg(" + QUOTATION + "inverse q:" + QUOTATION + ",q)" + NEW_LINE +
-"            #textmsg(" + QUOTATION + "get_inverse_kin done" + QUOTATION + ")" + NEW_LINE +
+"            textmsg(" + QUOTATION + "get_inverse_kin done" + QUOTATION + ")" + NEW_LINE +
 //"        elif cmd == 31:" + NEW_LINE +
 //"            textmsg(" + QUOTATION + "protective_stop" + QUOTATION + ")" + NEW_LINE +
 //"$V38        protective_stop()" + NEW_LINE +
@@ -800,8 +800,8 @@ std::string CS_SCRIPT = "# HEADER_BEGIN" + NEW_LINE +
 "            textmsg(" + QUOTATION + "pose_trans" + QUOTATION + ")" + NEW_LINE +
 "            p_from = pose_from_input_float_registers(0)" + NEW_LINE +
 "            p_from_to = pose_from_input_float_registers(6)" + NEW_LINE +
-"            p = pose_trans(p_from, p_from_to)" + NEW_LINE +
-"            pose_to_output_float_registers(0, p)" + NEW_LINE +
+"            p1 = pose_trans(p_from, p_from_to)" + NEW_LINE +
+"            pose_to_output_float_registers(0, p1)" + NEW_LINE +
 "            textmsg(" + QUOTATION + "pose_trans done" + QUOTATION + ")" + NEW_LINE +
 "        elif cmd == 40:" + NEW_LINE +
 "            textmsg(" + QUOTATION + "get_tcp_offset" + QUOTATION + ")" + NEW_LINE +
@@ -870,19 +870,19 @@ std::string CS_SCRIPT = "# HEADER_BEGIN" + NEW_LINE +
 "            q = get_inverse_kin(x)" + NEW_LINE +
 "            q_to_output_float_registers(0, q)" + NEW_LINE +
 "            #textmsg(" + QUOTATION + "inverse q:" + QUOTATION + ",q)" + NEW_LINE +
-"            #textmsg(" + QUOTATION + "get_inverse_kin_default done" + QUOTATION + ")" + NEW_LINE +
+"            textmsg(" + QUOTATION + "get_inverse_kin_default done" + QUOTATION + ")" + NEW_LINE +
 "        elif cmd == 60:" + NEW_LINE +
 "            # get_sensor_force" + NEW_LINE +
 "            sensor_force = get_builtin_tcp_force()" + NEW_LINE +
-"            #lock.acquire()" + NEW_LINE +
+"            lock.acquire()" + NEW_LINE +
 "            q_to_output_float_registers(24, sensor_force)" + NEW_LINE +
-"            #lock.release()" + NEW_LINE +
+"            lock.release()" + NEW_LINE +
 "        elif cmd == 61:" + NEW_LINE +
 "            # get_tcp_force" + NEW_LINE +
 "            tcp_force = get_tcp_force()" + NEW_LINE +
-"            #lock.acquire()" + NEW_LINE +
+"            lock.acquire()" + NEW_LINE +
 "            q_to_output_float_registers(24, tcp_force)" + NEW_LINE +
-"            #lock.release()" + NEW_LINE +
+"            lock.release()" + NEW_LINE +
 "        elif cmd == 62:" + NEW_LINE +
 "            # get_tcp_mas_cog" + NEW_LINE +
 "            mas_cog = get_tool_mass_CoM(0)" + NEW_LINE +

@@ -201,7 +201,7 @@ namespace cs_rtsi
 		/**
 		* @brief Returns true if a program is running on the controller, otherwise it returns false
 		*/
-		bool isProgramRunning();
+		RTSI_EXPORT bool isProgramRunning();
 
 
 	public:

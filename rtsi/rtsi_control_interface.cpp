@@ -564,11 +564,15 @@ namespace cs_rtsi
 		mp_rtsi->sendInputSetup(get_actual_joint_positions_history_input);
 
 		// RECIPE_10
-		int offside = 24;
-		std::vector<std::string> get_inverse_kin_input = { inIntReg(0),     inDoubleReg(0+ offside),  inDoubleReg(1 + offside), inDoubleReg(2 + offside),
-														  inDoubleReg(3 + offside),  inDoubleReg(4 + offside),  inDoubleReg(5 + offside), inDoubleReg(6 + offside),
-														  inDoubleReg(7 + offside),  inDoubleReg(8 + offside),  inDoubleReg(9 + offside), inDoubleReg(10 + offside),
-														  inDoubleReg(11 + offside)};
+		//int offside = 24;
+		//std::vector<std::string> get_inverse_kin_input = { inIntReg(0),     inDoubleReg(0+ offside),  inDoubleReg(1 + offside), inDoubleReg(2 + offside),
+		//												  inDoubleReg(3 + offside),  inDoubleReg(4 + offside),  inDoubleReg(5 + offside), inDoubleReg(6 + offside),
+		//												  inDoubleReg(7 + offside),  inDoubleReg(8 + offside),  inDoubleReg(9 + offside), inDoubleReg(10 + offside),
+		//												  inDoubleReg(11 + offside)};
+		std::vector<std::string> get_inverse_kin_input = { inIntReg(0),     inDoubleReg(0),  inDoubleReg(1), inDoubleReg(2),
+														  inDoubleReg(3),  inDoubleReg(4),  inDoubleReg(5), inDoubleReg(6),
+														  inDoubleReg(7),  inDoubleReg(8),  inDoubleReg(9), inDoubleReg(10),
+														  inDoubleReg(11) };
 		mp_rtsi->sendInputSetup(get_inverse_kin_input);
 
 		// RECIPE_11

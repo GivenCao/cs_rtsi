@@ -16,7 +16,7 @@ int main()
 
 	//cs_rtsi::RTSIReceiveInterface recv("192.168.40.27");
 	//cs_rtsi::RTSIControlInterface control("192.168.40.27");
-	std::string host = "172.21.113.154";
+	std::string host = "192.168.40.27";
 	std::string dash_host = "127.0.0.1";
 	cs_rtsi::RTSIControlInterface control(host);
 	std::vector<double> speed = { 0, 0, 0,0.05, 0, 0 };
@@ -34,7 +34,7 @@ int main()
 	while (true) {
 
 		ifstream readFile;
-		readFile.open(R"(D:\Work\CS\Code\RTSI\cs_rtsi\test\test_data\tcp_path_2.txt)");
+		readFile.open(R"(F:\Chison\cs_robot\rtsi\test\test_data\tcp_path_3.txt)");
 		//readFile.open(R"(D:\Work\CS\Code\RTSI\cs_rtsi\test\test_data\joint_path.txt)");
 	
 		vector<string> file_in;
